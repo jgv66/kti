@@ -1,0 +1,48 @@
+
+<ion-header no-border>
+  <ion-toolbar color="dark">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Acceso al sistema</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding  color="dark">
+
+  <ion-card color="dark">
+
+    <ion-img src="assets/imgs/inventa-001.png"></ion-img>
+
+    <ion-card-content color="dark">
+
+      <H1>Ingrese sus credenciales</H1>
+
+        <ion-list color="dark">
+            <ion-item color="dark">
+                <ion-label position="floating">Email</ion-label>
+                <ion-input type="text" [(ngModel)]="email" clearInput=true></ion-input>
+            </ion-item>
+            <ion-item color="dark">
+                <ion-label position="floating">Clave</ion-label>
+                <ion-input type="password" [(ngModel)]="clave" clearInput=true></ion-input>
+            </ion-item>
+            <ion-item color="dark">
+                <ion-label position="floating">Empresa</ion-label>
+                <ion-select [(ngModel)]='empresa' interface="action-sheet"  placeholder="Seleccione una empresa...">
+                    <ion-select-option *ngFor="let emp of empresas" [value]="emp.codigo">{{ emp.razonsocial }}</ion-select-option>
+                </ion-select>
+            </ion-item>
+            <ion-button fill="clear" expand="full" (click)="login()" >Ingresar</ion-button>
+        </ion-list>
+
+    </ion-card-content>
+    
+  </ion-card>
+
+  <div class="imgkinetik">
+      <img src="assets/imgs/logo-kinetik.png" >
+  </div>
+
+</ion-content>
+

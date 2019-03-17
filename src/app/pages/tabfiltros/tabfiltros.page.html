@@ -1,0 +1,28 @@
+
+<ion-header no-border>
+
+  <ion-toolbar color="dark">
+
+    <ion-title>Terminadas</ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button (click)="aBuscarTerminadas()" ><ion-icon slot="icon-only" name="refresh" color="warning"></ion-icon></ion-button>
+    </ion-buttons>
+
+  </ion-toolbar>
+
+</ion-header>
+
+<ion-content color="dark">
+
+    <ion-list no-lines color="dark">
+        <ion-item *ngFor="let tarea of terminadas" 
+                  (click)="revisarTarea( tarea.id )" 
+                  color="dark"
+                  detail> 
+          <ion-label>{{ tarea.fechatermino }} {{ tarea.horagrab }}</ion-label>
+          <ion-label><h2>{{ tarea.comentario }}</h2></ion-label>
+        </ion-item>
+    </ion-list>
+    
+</ion-content>

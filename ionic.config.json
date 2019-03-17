@@ -1,5 +1,7 @@
 {
   "name": "kti",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

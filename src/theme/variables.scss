@@ -3,6 +3,9 @@
 
 /** Ionic CSS Variables **/
 :root {
+
+  --my-highlight-color:  #d65e5e;
+  
   /** primary **/
   --ion-color-primary: #3880ff;
   --ion-color-primary-rgb: 56, 128, 255;
@@ -64,7 +67,7 @@
   --ion-color-medium-rgb: 152, 154, 162;
   --ion-color-medium-contrast: #ffffff;
   --ion-color-medium-contrast-rgb: 255, 255, 255;
-  --ion-color-medium-shade: #86888f;
+  --ion-color-medium-shade: #979799;
   --ion-color-medium-tint: #a2a4ab;
 
   /** light **/
@@ -74,4 +77,25 @@
   --ion-color-light-contrast-rgb: 0, 0, 0;
   --ion-color-light-shade: #d7d8da;
   --ion-color-light-tint: #f5f6f9;
+
+  /** kinetik zebra **/
+  --ion-color-keven: #ffefe0;
+  --ion-color-kodd: #fff4ea;
 }
+
+.button-md {
+  text-transform: none !important;
+}  
+
+.navbar-img {
+  height: 25px;
+  float: left;
+  margin-left: 7px;
+} 
+
+.toolbar-background {
+  background-color: dark;
+}
+
+@import "light";
+@import "dark";

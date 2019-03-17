@@ -1,0 +1,35 @@
+
+<ion-header no-border>
+
+    <ion-toolbar color="dark">
+        <ion-title>Tareas Pendientes</ion-title>
+        <ion-buttons slot="end">
+            <ion-button (click)="aBuscarTareas()" ><ion-icon slot="icon-only" name="refresh" color="warning"></ion-icon></ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+
+</ion-header>
+
+<ion-content color="dark">
+
+    <ion-list no-lines color="dark">
+        <ion-item *ngFor="let tarea of tareas" (click)="revisarTarea( tarea.id )" color="dark" detail> 
+            <!-- <ion-icon name="rocket"></ion-icon> -->
+            <ion-label text-wrap>
+                <ion-text>
+                    <h2>Nro:{{ tarea.id }} - {{ tarea.comentario }}</h2>
+                </ion-text>
+                <ion-text color="warning">
+                    <p class="texto_75">
+                        <ion-icon name="calendar"></ion-icon>{{ tarea.fecha | date:'dd/MM/yyyy'}} 
+                        <ion-icon name="time"></ion-icon>{{ tarea.horagrab | horagrab }}
+                    </p>
+                </ion-text>
+                <ion-text color="warning" *ngIf=" tarea.destinatarios != '' ">
+                    <p class="texto_75">Destinado a :{{ tarea.destinatarios }}</p>
+                </ion-text>
+            </ion-label>
+        </ion-item>
+    </ion-list>
+    
+</ion-content>

@@ -1,0 +1,148 @@
+
+<ion-header no-border>
+
+    <ion-toolbar color="dark">
+
+      <ion-buttons slot="start">
+        <ion-back-button defaultHref="/tabs/tabinicio"></ion-back-button>
+      </ion-buttons>
+
+      <ion-title>Conteo Nro:{{ idTarea }}</ion-title>
+
+      <ion-buttons slot="end">
+        <ion-button><ion-icon slot="icon-only" name="menu"></ion-icon></ion-button>
+      </ion-buttons>
+
+    </ion-toolbar>
+
+</ion-header>
+
+<ion-content color="dark">
+
+  <ion-list color="dark">
+
+      <ion-item color="dark" text-left>
+          <ion-label position="fixed">Código :</ion-label>
+          <ion-input type="text" clearInput="true" [(ngModel)]="codigo" autofocus="true" clearOnEdit="true"></ion-input>
+      </ion-item>
+  
+      <ion-item *ngIf=" descripcion != '' " color="dark" class="texto-chico">
+          <ion-label>{{ descripcion }} </ion-label>
+      </ion-item>
+  
+      <ion-item color="dark">
+        <ion-grid>
+            <ion-row>
+              <ion-col size="3">
+                <ion-button size="small" expand="block"><ion-icon slot="icon-only" name="barcode"></ion-icon></ion-button>
+              </ion-col>
+              <ion-col size="4">
+                <ion-button size="small" expand="block"><ion-icon slot="icon-only" name="search"></ion-icon>Buscar</ion-button>
+              </ion-col>
+              <ion-col size="5">
+                <ion-button size="small" expand="block" (click)="validarCodigo()"><ion-icon slot="icon-only" name="checkmark"></ion-icon>Validar</ion-button>
+              </ion-col>
+            </ion-row>
+        </ion-grid>
+    </ion-item>
+
+    <ion-item-divider color="dark" *ngIf=" validando ">
+      <ion-label>
+        {{ descripcion }}
+      </ion-label>
+    </ion-item-divider>
+
+    <ion-item color="dark" no-paddig>
+      <ion-grid>
+        <ion-row >
+            <ion-col size="3">
+                <ion-toggle [(ngModel)]="ud1" (ionChange)="cambiaUnidad(2)" checked></ion-toggle>
+            </ion-col>
+            <ion-col size="9">
+                <ion-item color="dark" [disabled]=" ud2 ">
+                  <ion-label>Cant. ({{ unidad_1 }}) :</ion-label>
+                  <ion-input type="number" [(ngModel)]="cantidad1" (ionChange)="cambiaCantidad(2)" clearInput="true" clearOnEdit="true"></ion-input>
+                </ion-item>
+            </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+
+    <ion-item color="dark" no-paddig>
+      <ion-grid>
+        <ion-row >
+            <ion-col size="3">
+                <ion-toggle [(ngModel)]="ud2" (ionChange)="cambiaUnidad(1)" checked></ion-toggle>
+            </ion-col>
+            <ion-col size="9">
+              <ion-item color="dark"  [disabled]=" ud1 ">
+                <ion-label>Cant. ({{ unidad_2 }}) :</ion-label>
+                <ion-input type="number" [(ngModel)]="cantidad2" (ionChange)="cambiaCantidad(1)" clearInput="true" clearOnEdit="true"></ion-input>
+              </ion-item>
+            </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+
+    <ion-item color="dark">
+      <ion-grid>
+          <ion-row>
+            <ion-col size="3" *ngIf=" !listaCompletas ">
+              <ion-button size="small" expand="block" (click)=" listaCompletas=!listaCompletas "><ion-icon name="eye"></ion-icon></ion-button>
+            </ion-col>
+            <ion-col size="3" *ngIf=" listaCompletas ">
+              <ion-button size="small" expand="block" (click)=" listaCompletas=!listaCompletas "><ion-icon name="eye-off"></ion-icon></ion-button>
+            </ion-col>
+            <ion-col size="9">
+              <ion-button size="small" expand="block" (click)="agregarAConteo()"><ion-icon name="attach"></ion-icon>Agregar a este conteo</ion-button>
+            </ion-col>
+          </ion-row>
+      </ion-grid>
+    </ion-item>
+
+  </ion-list>
+
+  <ion-list *ngIf=" listaCompletas ">
+
+    <ion-item  color="medium" lines="full">
+      <ion-label>Mi Conteo para la tarea nro: {{ idTarea }}</ion-label>
+    </ion-item>
+
+    <ion-grid>
+        <ion-row>
+            <ion-col size="4"><ion-label>Código/Descripción</ion-label></ion-col>
+            <ion-col size="2"><ion-label>UN1           </ion-label></ion-col>
+            <ion-col size="2"><ion-label>SF1           </ion-label></ion-col>
+            <ion-col size="2"><ion-label>UN2           </ion-label></ion-col>
+            <ion-col size="2"><ion-label>SF2           </ion-label></ion-col>
+        </ion-row>
+    </ion-grid>
+    
+    <ion-grid>
+        <ion-row *ngFor="let item of itemesContados; let i = index">
+            <ion-col size="4" ><ion-label>{{ item.codigo   }}</ion-label></ion-col>
+            <ion-col size="2" ><ion-label>{{ item.unidad_ud1                                                           }}</ion-label></ion-col>
+            <ion-col size="2" ><ion-label>{{ item.fisico_ud1.toLocaleString(    'en-IN',{ maximumFractionDigits: 2 } ) }}</ion-label></ion-col>
+            <ion-col size="2" ><ion-label>{{ item.unidad_ud2                                                           }}</ion-label></ion-col>
+            <ion-col size="2" ><ion-label>{{ item.fisico_ud2.toLocaleString(    'en-IN',{ maximumFractionDigits: 2 } ) }}</ion-label></ion-col>
+            <ion-col size="12"><ion-label>{{ item.descripcion }}</ion-label></ion-col>
+        </ion-row>
+    </ion-grid>
+
+    <!-- <app-grillastock [itemesContados]="itemesContados"></app-grillastock> -->
+
+    <ion-grid>
+      <ion-row>
+        <ion-col size="5">
+          <ion-button  color="danger" size="small" expand="block" (click)="eliminarConteo()"><ion-icon name="trash"></ion-icon>Eliminar conteo</ion-button>
+        </ion-col>
+        <ion-col size="7">
+          <ion-button size="small" expand="block" (click)="finalizarConteo()"><ion-icon name="trophy"></ion-icon>Grabar y terminar el conteo</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+
+  </ion-list>
+
+</ion-content>
